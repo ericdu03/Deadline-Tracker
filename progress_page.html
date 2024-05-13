@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <link href="styles.css" rel="stylesheet"/>
+</head>
+<body>
+  <h1>Deadline Tracker</h1>
+  
+  <p>Enter the deadline name, and its corresponding deadline date below. Deadline hours are assumed to be 11:59PM the date entered.</p>
+
+  <label for="name">Assignment Name: </label>
+  <input type="text" id="name" name="name">
+  <p></p>
+  <label for="time">Deadline: </label>
+  <input type="text" id="time" name="time" placeholder = "MM/DD/YYYY">
+  <p id = "validation" style="color:red"></p>
+
+  <script src="background.js"></script>
+  <button id="add" onclick="getDateTime()">Add Deadline</button>
+
+  <div id="bars" style="padding-top:1cm">  </div>
+</html>

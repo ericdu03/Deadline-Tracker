@@ -1,0 +1,10 @@
+meter {
+    width: 1000px;
+    height: 20px;
+    bottom: 10px;
+}
+
+div {
+    position:relative;
+    left:200px;
+}

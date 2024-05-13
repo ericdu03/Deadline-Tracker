@@ -1,0 +1,1 @@
+I wonder whether I can bypass the html script calls by writing js for the button creation 
