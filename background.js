@@ -53,21 +53,23 @@ function addBar(name) {
     text.innerHTML = name;
     text.style.fontSize = '15pt';
     document.getElementById("bars").append(text);
-    // document.getElementById("bars").append(name + ": ");
     document.getElementById("bars").append(bar);
 
+    // TODO: fix aftertext so that deadline time shows
     let afterText = document.createElement("p");
     afterText.innerHTMl = deadlines[0].getDateTime();
     bar.after(afterText);
 
+    // add white space after
     let newline = document.createElement("body");
     newline.style.paddingBottom = "10px"
     document.getElementById("bars").append(newline);
 
 }
 
-window.setInterval(updateBar, 5000);
-function updateBar() {
+window.setInterval(updateBar, 5000); // rate at which progress bars update
+
+function updateBar() { // method to update all progress bars periodically
     var now = Date.now();
     document.getElementById("bars").innerHTML = ' ';
 
