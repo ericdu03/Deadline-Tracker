@@ -41,7 +41,7 @@ function addBar(name) {
     // Threshold colors for the meter element
     bar.min = 0;
     bar.max = 1;
-    bar.low = 0.3;
+    bar.low = 0.2;
     bar.high = 0.6;
     bar.optimum = 0.8;
     bar.value = 1;
@@ -55,10 +55,14 @@ function addBar(name) {
     document.getElementById("bars").append(text);
     document.getElementById("bars").append(bar);
 
-    // TODO: fix aftertext so that deadline time shows
+    // TODO: try and figure out a way to right-justify timestamp
     let afterText = document.createElement("p");
-    afterText.innerHTMl = deadlines[0].getDateTime();
-    bar.after(afterText);
+    let timestamp = new Date(deadlines[deadlines.length-1] - 1) // subtract 1 so it shows 11:59PM of the previous day
+    afterText.style.textAlign = 'right';
+    afterText.innerHTML = timestamp.toLocaleString('en-US', {month: "long", day: "2-digit", minute: "2-digit" , hour12:true, hour:"numeric"});
+    // bar.after(afterText);
+    document.getElementById("bars").append(afterText);
+
 
     // add white space after
     let newline = document.createElement("body");
@@ -67,7 +71,7 @@ function addBar(name) {
 
 }
 
-window.setInterval(updateBar, 5000); // rate at which progress bars update
+// window.setInterval(updateBar, 5000); // rate at which progress bars update
 
 function updateBar() { // method to update all progress bars periodically
     var now = Date.now();
@@ -77,7 +81,7 @@ function updateBar() { // method to update all progress bars periodically
         let bar = document.createElement("meter");
         bar.min = 0;
         bar.max = 1;
-        bar.low = 0.3;
+        bar.low = 0.2;
         bar.high = 0.6;
         bar.optimum = 0.8;
 
@@ -88,10 +92,12 @@ function updateBar() { // method to update all progress bars periodically
         text.innerHTML = names[i];
         text.style.fontSize = '15pt';
         document.getElementById("bars").append(text);
-
         document.getElementById("bars").append(bar);
+
         let afterText = document.createElement("p");
-        afterText.innerHTMl = Date.parse(deadlines[i]);
+
+        let timestamp = new Date(deadlines[i] - 1) // subtract 1 so it shows 11:59PM of the previous day
+        afterText.innerHTML = timestamp.toLocaleString('en-US', {month: "long", day: "2-digit", minute: "2-digit" , hour12:true, hour:"numeric"});
         bar.after(afterText);
 
         let newline = document.createElement("body");
