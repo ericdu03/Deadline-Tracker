@@ -1,3 +1,13 @@
+class Course {
+    constructor() {
+        this.deadlines = [];
+        this.classNames = [];
+        this.date_created = [];
+    }
+}
+
+
+
 deadlines = [];
 names = [];
 date_created = [];
