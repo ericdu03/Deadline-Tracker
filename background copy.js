@@ -1,3 +1,51 @@
+courseNames = [];
+
+class Course {
+    constructor(name) {
+        this.courseName = name;
+        this.deadlines = [];
+        this.deadlineNames = [];
+        this.date_created = [];
+        courseNames.append(name);
+    }
+
+    addAssignment(deadline, name, date_created) {
+        this.deadlines.append(deadline); 
+        this.deadlineNames.append(name);
+        this.date_created.append(date_created);
+
+        let bar = document.createElement("meter");
+        
+        bar.min = 0;
+        bar.max = 1;
+        bar.low = 0.2;
+        bar.high = 0.6;
+        bar.optimum = 0.8;
+        bar.value = 1;
+
+        let text = document.createElement("div");
+        let textId = deadlines.length - 1; // ID'd based on the order in which they are due, zero indexed
+        text.innerHTML = name;
+        text.className = "textStyle";
+        text.id = this.courseName + textId;
+
+        let afterText = document.createElement("div");
+        let timestamp = new Date(deadlines[deadlines.length-1] - 1) // subtract 1 so it shows 11:59PM of the previous day
+        let time_fmt = {month: "long",day: "2-digit", minute: "2-digit", hour12:true, hour:"numeric"};
+        afterText.innerHTML = timestamp.toLocaleString('en-US', time_fmt);
+        afterText.style.fontSize = '11pt';
+
+        document.getElementById("bars").append(text, document.createElement("br"));
+        document.getElementById(textId).append(document.createElement("br"), bar, afterText);
+    }
+}
+
+function makeCourse(name) {
+    let course = new Course(name);
+    course.createBars();
+}
+
+
 deadlines = [];
 names = [];
 date_created = [];
@@ -23,6 +71,7 @@ function validate(name, date) {
     }
     return text;
 }
+
 
 function getDateTime() {
     let name = document.getElementById('name').value;
@@ -65,41 +114,9 @@ function addBar(name) {
     document.getElementById(textId).append(document.createElement("br"), bar, afterText);
     // text.after(bar, afterText, newline)
 
-
-    // --------------------------- TESTING BELOW -----------------------------
-    var collapsible = document.createElement("button");
-    collapsible.innerHTML = "Collapsible button";
-    collapsible.className = "collapsible";
-
-    collapsible.addEventListener("click", function() {
-        this.classList.toggle("active");
-        var content = this.nextElementSibling;
-        console.log(content);
-        if (content.style.maxHeight){
-            content.style.maxHeight = null;
-        } else {
-            content.style.maxHeight = content.scrollHeight + "px";
-        }
-    })
-    document.getElementById("bars").append(collapsible);
-
-    var content2 = document.createElement("div");
-    content2.className = "content"; // div content class
-    content2.id = "div2";
-
-    var content3 = document.createElement("p");
-    content3.innerHTML = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
-
-    document.getElementById("bars").append(content2);
-    document.getElementById("div2").append(content3);
-    // document.getElementById("bars").append(content);
-
-
-    // document.getElementById(textId).append(collapsible);
-
 }
 
-// window.setInterval(updateBar, 5000); // rate at which progress bars update
+window.setInterval(updateBar, 5000); // rate at which progress bars update
 
 function updateBar() { // method to update all progress bars periodically
     var now = Date.now();
