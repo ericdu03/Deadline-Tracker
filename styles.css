@@ -15,4 +15,18 @@ div {
     list-style-type:none;
 } */
 
+.textStyle {
+    font-size: 15pt;
+    margin-bottom: 10px;
+    padding-left: 0.5cm;
+    padding-top: 0.5cm;
+    padding-bottom: 0.5cm;
+    padding-right: 0.5cm;
 
+    /* border stylings */
+    border: 1px solid rgb(83, 196, 230) ;
+    border-radius: 0.2cm;
+    border-left: solid #32a1ce;
+    left: 10px;
+    background-color: #d6ecf5;
+}
