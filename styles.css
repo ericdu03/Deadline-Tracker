@@ -1,16 +1,18 @@
 meter {
-    width: 1000px;
+    width: 1500px;
     height: 20px;
-    bottom: 10px;
+    bottom: 20px;
 }
-
+/* 
 div {
     position:relative;
     left:200px;
-}
+} */
 
-ul {
+/* ul {
     display: flex;
     justify-content: space-between;
     list-style-type:none;
-}
+} */
+
+

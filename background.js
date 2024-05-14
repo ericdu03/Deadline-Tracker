@@ -49,25 +49,37 @@ function addBar(name) {
 
 
     // add bar to page
-    let text = document.createElement("p");
+    let text = document.createElement("div");
+    let textId = String(date_created[deadlines.length - 1]);
     text.innerHTML = name;
+
+    {
     text.style.fontSize = '15pt';
-    document.getElementById("bars").append(text);
-    document.getElementById("bars").append(bar);
+    text.style.marginBottom='10px'
+    text.id = textId;
+    text.style.paddingLeft = "0.5cm";
+    text.style.paddingTop = "0.5cm";
+    text.style.paddingBottom = "0.5cm";
+    }
 
-    // TODO: try and figure out a way to right-justify timestamp
-    let afterText = document.createElement("p");
+    { // border stylings
+    text.style.border = "1px solid black";
+    text.style.borderRadius = "0.2cm";
+    text.style.borderLeft = "solid #32a1ce";
+    text.style.left = "10px";
+    // text.style.position = "";
+    }
+    
+    // create text showing deadline
+    let afterText = document.createElement("div");
     let timestamp = new Date(deadlines[deadlines.length-1] - 1) // subtract 1 so it shows 11:59PM of the previous day
-    afterText.style.textAlign = 'right';
     afterText.innerHTML = timestamp.toLocaleString('en-US', {month: "long", day: "2-digit", minute: "2-digit" , hour12:true, hour:"numeric"});
-    // bar.after(afterText);
-    document.getElementById("bars").append(afterText);
+    afterText.style.fontSize = '11pt';
 
-
-    // add white space after
-    let newline = document.createElement("body");
-    newline.style.paddingBottom = "10px"
-    document.getElementById("bars").append(newline);
+    // add elements to HTML, with padding
+    document.getElementById("bars").append(text, document.createElement("br"));
+    document.getElementById(textId).append(document.createElement("br"), bar, afterText);
+    // text.after(bar, afterText, newline)
 
 }
 
