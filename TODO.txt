@@ -1,0 +1,6 @@
+List of todo items:
+- figure out if it's possible to move the text.style lines to css, and import them from there --> makes code more readable
+- migrate code to updateBar()
+- add functionality to remove assignment
+
+- possible: maybe find a place to store deadlines in local memory, so that they may be accessed even after the page is reloaded.

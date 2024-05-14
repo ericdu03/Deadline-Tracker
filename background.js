@@ -50,9 +50,10 @@ function addBar(name) {
 
     // add bar to page
     let text = document.createElement("div");
-    let textId = String(date_created[deadlines.length - 1]);
+    let textId = deadlines.length; // ID'd based on the order in which they are due
     text.innerHTML = name;
 
+    // TODO: Can I move this to a separate file 
     {
     text.style.fontSize = '15pt';
     text.style.marginBottom='10px'
