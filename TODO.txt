@@ -2,5 +2,4 @@ List of todo items:
 - add functionality to remove assignment
 - maybe find a place to store deadlines in local memory, so that they may be accessed even after the page is reloaded.
 - look at sorting items based on deadline
-- figure out how to integrate div elements into dropdown
 

@@ -124,4 +124,3 @@ function updateBar() { // method to update all progress bars periodically
         document.getElementById(i).setAttribute("value", (deadlines[i] - now)/(deadlines[i]- date_created[i]));
     }
 }
-

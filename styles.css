@@ -1,5 +1,5 @@
 meter {
-    width: 1500px;
+    width: 100%;
     height: 20px;
     bottom: 20px;
 }
@@ -17,11 +17,12 @@ div {
 
 .textStyle {
     font-size: 15pt;
-    margin-bottom: 10px;
+    margin-bottom: 0.5cm;
     padding-left: 0.5cm;
     padding-top: 0.5cm;
     padding-bottom: 0.5cm;
     padding-right: 0.5cm;
+    margin-top: 0.5cm;
 
     /* border stylings */
     border: 1px solid rgb(83, 196, 230) ;
@@ -37,11 +38,12 @@ div {
     color: white;
     cursor: pointer;
     padding: 18px;
-    width: 100%;
+    width: 1500px;
     border: none;
     text-align: left;
     outline: none;
-    font-size: 15px;
+
+    margin-left:0.5cm;
 }
 
 .active, .collapsible:hover {
@@ -49,10 +51,11 @@ div {
 }
 
 .content {
-    width:1500px;
+    /* width:1500px; */
     padding: 0 18px;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
     background-color: #f1f1f1;
+    margin-left:0.5cm;
 }
