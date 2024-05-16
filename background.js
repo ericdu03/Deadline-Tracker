@@ -24,7 +24,6 @@ class Course {
         collapsible.addEventListener("click", function() {
             this.classList.toggle("active");
             var content = this.nextElementSibling;
-            console.log(content);
             if (content.style.maxHeight){
                 content.style.maxHeight = null;
             } else {
@@ -38,8 +37,6 @@ class Course {
 
         document.getElementById("courses").append(collapsible);
         collapsible.after(courseDeadlines);
-        
-        COURSENAMES.push(name);
     }
     /** 
      * Adds an assignment. If the Course Name doesn't already exist, creates a new collapsible menu with correspondoing course name. Also appends all course information to instance array.
@@ -78,14 +75,37 @@ class Course {
         assignment.className = "textStyle";
         assignment.id = "assignment " + String(date_created); // little bit janky but it works, find a nicer way to do this?   
 
-        let afterText = document.createElement("div");
+        let afterText = document.createElement("ul");
         let timestamp = new Date(deadline)
         let time_fmt = {month: "long",day: "2-digit", minute: "2-digit", hour12:true, hour:"numeric"};
-        afterText.innerHTML = timestamp.toLocaleString('en-US', time_fmt);
-        afterText.style.fontSize = '11pt';
+        
+        let deadline_string = document.createElement("li");
+        deadline_string.innerHTML = timestamp.toLocaleString('en-US', time_fmt);
+        deadline_string.style.fontSize = "10pt";
+
+		let deleteButton = document.createElement("button");
+		deleteButton.innerHTML = "Delete";
+        deleteButton.id = "button " + date_created;
+
+        deleteButton.addEventListener("click", function() {
+            let assignment = this.parentNode.parentNode;
+            let courseName = assignment.parentNode.id;
+            let course = COURSES[COURSENAMES.indexOf(courseName)];
+            let date_created = this.id.substring(8, this.id.length);
+            let index = course.date_created.indexOf(date_created);
+
+            // remove assignment from course object
+            course.date_created.splice(index);
+            course.deadlines.splice(index); 
+            course.deadlineNames.splice(index);
+
+            assignment.parentElement.removeChild(assignment);
+        })
 
         document.getElementById(this.courseName).append(assignment);
         document.getElementById(assignment.id).append(bar, afterText);
+        // afterText.append(deleteButton, deadline_string);
+        afterText.append(deadline_string, deleteButton);
     }
 
     /**
@@ -99,9 +119,12 @@ class Course {
         }
     }
 
-    removeAssignment() {
-        // TODO: add functionality to remove assignment from list, requires remove button and corresponding unique id
-    }
+    // removeAssignment(button_id) {
+    //     // TODO: add functionality to remove assignment from list, requires remove button and corresponding unique id
+    //     let button = document.getElementById(button_id);
+    //     let date_created = button_id.substring(8,button_id.length);
+    //     transition();
+    // }
 }
 
 /**
@@ -113,26 +136,29 @@ function getInfo() {
     let courseName = document.getElementById('courseName').value;
     document.getElementById("validation").innerHTML = validate(name, deadline);
 
+    var course;
     if (COURSENAMES.includes(courseName)) {
         let index = COURSENAMES.indexOf(courseName);
         var course = COURSES[index];
-
     } else {
         var course = new Course(courseName);
-        COURSENAMES.push(name);
+        COURSENAMES.push(courseName);
         COURSES.push(course);
     }
 
     course.addAssignment(Date.parse(deadline) + 86399999, name, Date.now()) // added time to make it 11:59 of the entered date
+    transition();
 
-    coll = document.getElementsByClassName("collapsible");
+}
+
+function transition() {
+    coll = document.getElementsByClassName("collapsible"); // can I get rid of the for loop here?
     for (let i = 0; i < coll.length; i++) {
         var content = coll[i].nextElementSibling;
         if (content.style.maxHeight) {
             content.style.maxHeight = content.scrollHeight + "px";
         }
     }
-
 }
 
 /** 
